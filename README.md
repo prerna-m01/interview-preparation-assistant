@@ -34,7 +34,6 @@ The system helps users prepare for interviews through document-based question an
 
 ## 📁 Project Structure
 
-## 📁 Project Structure
 
 ```
 interview-prep-assistant/
