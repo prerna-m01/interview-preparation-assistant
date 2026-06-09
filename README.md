@@ -1,19 +1,22 @@
 # Interview Prep Assistant
 
-An AI-powered Interview Preparation Assistant built using **FastAPI**, **RAG (Retrieval-Augmented Generation)**, **FAISS**, and **Google Gemini**.
+An AI-powered Interview Preparation Assistant built using **FastAPI**, **RAG (Retrieval-Augmented Generation)**, **FAISS**, and **Google Gemini**.  
+
+The system helps users prepare for interviews through document-based question answering, mock interviews, resume analysis, and automated answer evaluation.
 
 ---
 
 ## 🚀 Features
 
-- PDF-based Knowledge Base  
-- Semantic Search with FAISS  
-- Retrieval-Augmented Generation (RAG)  
-- Resume Parsing  
-- Mock Interview Question Generation  
-- Answer Evaluation & Feedback  
-- Interview Report Generation  
-- FastAPI Backend APIs  
+- 📄 PDF Knowledge Base Processing  
+- 🔍 Semantic Search using FAISS  
+- 🤖 RAG-based Question Answering System  
+- 📑 Resume Parsing and Analysis  
+- 🎯 Mock Interview Question Generation  
+- 📝 AI-powered Answer Evaluation  
+- 📊 Interview Report Generation  
+- 📚 Interview History Tracking  
+- 🚀 FastAPI Backend with Swagger Documentation  
 
 ---
 
@@ -25,16 +28,54 @@ An AI-powered Interview Preparation Assistant built using **FastAPI**, **RAG (Re
 - Sentence Transformers  
 - FAISS  
 - PyPDF  
+- Uvicorn  
 
 ---
 
-## 🔄 Project Workflow
+## 📁 Project Structure
 
-PDF → Chunking → Embeddings → FAISS → Retrieval → Gemini → Response Generation  
+```
+interview-prep-assistant/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── .env
+│
+├── data/
+│   ├── raw/
+│   └── interviews/
+│
+├── vectorstore/
+│   ├── index.faiss
+│   └── chunks.pkl
+│
+├── src/
+│   ├── api/
+│   │   └── routes.py
+│   │
+│   ├── components/
+│   │   ├── pdf_loader.py
+│   │   ├── chunker.py
+│   │   ├── embedder.py
+│   │   ├── vector_store.py
+│   │   ├── retriever.py
+│   │   ├── llm_client.py
+│   │   ├── question_generator.py
+│   │   ├── evaluator.py
+│   │   ├── resume_parser.py
+│   │   └── report_generator.py
+│   │
+│   └── pipeline/
+│       ├── rag_pipeline.py
+│       └── interview_pipeline.py
+│
+└── tests/
+```
 
 ---
 
-## 📦 Installation
+## ⚙️ Installation
 
 ### Clone the repository
 ```bash
@@ -47,7 +88,7 @@ cd interview-prep-assistant
 python -m venv venv
 ```
 
-### Activate virtual environment
+### Activate environment
 
 **Windows**
 ```bash
@@ -84,28 +125,53 @@ uvicorn app:app --reload
 
 ---
 
-## 📚 API Documentation
+## 🌐 Server Access
 
-```
-http://127.0.0.1:8000/docs
-```
+- **Base URL:** http://127.0.0.1:8000  
+- **Swagger Docs:** http://127.0.0.1:8000/docs  
 
 ---
 
-## 🔌 Main Endpoints
+## 🔌 API Endpoints
 
-- GET `/` → Home route  
-- GET `/health` → Health check  
-- GET `/ask?question=YOUR_QUESTION` → Ask interview questions  
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Home endpoint |
+| POST | `/ask` | Ask questions from knowledge base |
+| POST | `/start-interview` | Generate interview questions |
+| POST | `/evaluate-answer` | Evaluate candidate answers |
+| POST | `/upload-resume` | Parse resume |
+| GET | `/history` | View interview history |
+
+---
+
+## 🔄 Workflow
+
+```
+PDF Documents
+      ↓
+Text Chunking
+      ↓
+Embeddings Generation
+      ↓
+FAISS Vector Store
+      ↓
+Retriever
+      ↓
+Google Gemini LLM
+      ↓
+Final Generated Response
+```
 
 ---
 
 ## 🔮 Future Enhancements
 
-- Resume-based interview generation  
-- Authentication system  
-- Docker deployment  
-- PostgreSQL integration  
-- Interview analytics dashboard  
+- User Authentication System  
+- PostgreSQL Database Integration  
+- Docker Deployment  
+- Resume-based Personalized Interviews  
+- Performance Analytics Dashboard  
+- Voice-based Mock Interviews  
 
 ---
