@@ -34,6 +34,8 @@ The system helps users prepare for interviews through document-based question an
 
 ## 📁 Project Structure
 
+## 📁 Project Structure
+
 ```
 interview-prep-assistant/
 │
@@ -70,10 +72,20 @@ interview-prep-assistant/
 │       ├── rag_pipeline.py
 │       └── interview_pipeline.py
 │
-└── tests/
+├── tests/
+│   ├── __pycache__/
+│   ├── __init__.py
+│   ├── test_evaluator.py
+│   ├── test_history.py
+│   ├── test_interview.py
+│   ├── test_llm.py
+│   ├── test_question_generator.py
+│   ├── test_rag.py
+│   ├── test_resume_parser.py
+│   └── test_retrieval.py
+│
+└── README.md
 ```
-
----
 
 ## ⚙️ Installation
 
