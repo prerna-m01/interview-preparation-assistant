@@ -22,12 +22,19 @@ evaluator = Evaluator()
 INDEX_PATH = "vectorstore/index.faiss"
 CHUNKS_PATH = "vectorstore/chunks.pkl"
 
-if os.path.exists(INDEX_PATH):
+print("INDEX EXISTS:", os.path.exists(INDEX_PATH))
+print("CHUNKS EXISTS:", os.path.exists(CHUNKS_PATH))
+
+if os.path.exists(INDEX_PATH) and os.path.exists(CHUNKS_PATH):
+
+    print("Loading existing FAISS index...")
 
     index = vector_store.load_index(INDEX_PATH)
     chunks = vector_store.load_chunks(CHUNKS_PATH)
 
 else:
+
+    print("Building new FAISS index...")
 
     text = loader.load_pdf("data/raw/sample_ml_notes.pdf")
     chunks = chunker.create_chunks(text)

@@ -13,6 +13,5 @@ env/
 *.h5
 *.faiss
 models/
-vectorstore/
 *.log
 .DS_Store
