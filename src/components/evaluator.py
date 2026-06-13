@@ -12,7 +12,7 @@ class Evaluator:
         question,
         candidate_answer
     ):
-
+    
         prompt = f"""
         You are an experienced technical interviewer.
 

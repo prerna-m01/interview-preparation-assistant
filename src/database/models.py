@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, Text
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -9,8 +9,8 @@ class InterviewRecord(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    question = Column(Text)
+    question = Column(Text, nullable=False)
+    candidate_answer = Column(Text, nullable=False)
+    evaluation = Column(Text, nullable=False)
 
-    candidate_answer = Column(Text)
-
-    evaluation = Column(Text)
+    score = Column(Integer, nullable=False)
