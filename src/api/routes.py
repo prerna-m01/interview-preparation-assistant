@@ -19,14 +19,30 @@ router = APIRouter()
 
 # INITIALIZE COMPONENTS
 
+# INITIALIZE COMPONENTS
+
+print("ROUTES 1")
 loader = PDFLoader()
+
+print("ROUTES 2")
 chunker = Chunker()
+
+print("ROUTES 3")
 embedder = Embedder()
+
+print("ROUTES 4")
 vector_store = VectorStore()
+
+print("ROUTES 5")
 evaluator = Evaluator()
 
+print("ROUTES 6")
 repository = InterviewRepository()
+
+print("ROUTES 7")
 weak_topic_extractor = WeakTopicExtractor()
+
+print("ROUTES 8")
 
 INDEX_PATH = "vectorstore/index.faiss"
 CHUNKS_PATH = "vectorstore/chunks.pkl"
@@ -36,30 +52,41 @@ print("CHUNKS EXISTS:", os.path.exists(CHUNKS_PATH))
 
 # LOAD OR CREATE VECTORSTORE
 
+print("ROUTES 9")
+
 if os.path.exists(INDEX_PATH) and os.path.exists(CHUNKS_PATH):
 
-    print("Loading existing FAISS index...")
+    print("ROUTES 10 - Loading existing FAISS")
 
     index = vector_store.load_index(INDEX_PATH)
+
+    print("ROUTES 11")
+
     chunks = vector_store.load_chunks(CHUNKS_PATH)
+
+    print("ROUTES 12")
 
 else:
 
-    print("Building new FAISS index...")
+    print("ROUTES 13 - Building new FAISS")
 
     text = loader.load_pdf(
         "data/raw/sample_ml_notes.pdf"
     )
 
+    print("ROUTES 14")
+
     chunks = chunker.create_chunks(text)
 
-    embeddings = embedder.generate_embeddings(
-        chunks
-    )
+    print("ROUTES 15")
 
-    index = vector_store.create_index(
-        embeddings
-    )
+    embeddings = embedder.generate_embeddings(chunks)
+
+    print("ROUTES 16")
+
+    index = vector_store.create_index(embeddings)
+
+    print("ROUTES 17")
 
     vector_store.save_index(
         index,
