@@ -239,3 +239,22 @@ def analytics():
     finally:
 
         db.close()
+
+@router.get("/weak-topics")
+def weak_topics():
+
+    db = SessionLocal()
+
+    try:
+
+        topics = repository.get_common_weak_topics(
+            db
+        )
+
+        return {
+            "common_weak_topics": topics
+        }
+
+    finally:
+
+        db.close()
