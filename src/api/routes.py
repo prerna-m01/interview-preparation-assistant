@@ -13,6 +13,7 @@ from src.components.evaluator import Evaluator
 
 from src.database.session import SessionLocal
 from src.repositories.interview_repository import InterviewRepository
+from src.components.weak_topic_extractor import WeakTopicExtractor
 
 router = APIRouter()
 
@@ -25,6 +26,7 @@ vector_store = VectorStore()
 evaluator = Evaluator()
 
 repository = InterviewRepository()
+weak_topic_extractor = WeakTopicExtractor()
 
 INDEX_PATH = "vectorstore/index.faiss"
 CHUNKS_PATH = "vectorstore/chunks.pkl"
@@ -134,6 +136,7 @@ def evaluate_answer(
     )
 
     score = extract_score(result)
+    weak_topics = weak_topic_extractor.extract(result)
 
     db = SessionLocal()
 
@@ -144,7 +147,8 @@ def evaluate_answer(
             question=question,
             candidate_answer=candidate_answer,
             evaluation=result,
-            score=score
+            score=score,
+            weak_topics=weak_topics
         )
 
     finally:
@@ -193,10 +197,43 @@ def history():
                     "question": record.question,
                     "answer": record.candidate_answer,
                     "evaluation": record.evaluation,
-                    "score": record.score
+                    "score": record.score,
+                    "weak_topics": record.weak_topics
                 }
                 for record in records
             ]
+        }
+    
+
+    finally:
+
+        db.close()
+
+@router.get("/analytics")
+def analytics():
+
+    db = SessionLocal()
+
+    try:
+
+        total_interviews = repository.get_total_interviews(db)
+
+        average_score = repository.get_average_score(db)
+
+        highest_score = repository.get_highest_score(db)
+
+        lowest_score = repository.get_lowest_score(db)
+
+        return {
+            "total_interviews": total_interviews,
+            "average_score": round(average_score, 2)
+            if average_score else 0,
+
+            "highest_score": highest_score
+            if highest_score else 0,
+
+            "lowest_score": lowest_score
+            if lowest_score else 0
         }
 
     finally:

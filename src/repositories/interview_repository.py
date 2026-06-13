@@ -9,14 +9,16 @@ class InterviewRepository:
         question,
         candidate_answer,
         evaluation,
-        score
+        score,
+        weak_topics
     ):
 
         record = InterviewRecord(
             question=question,
             candidate_answer=candidate_answer,
             evaluation=evaluation,
-            score=score
+            score=score,
+            weak_topics=weak_topics
         )
 
         db.add(record)
