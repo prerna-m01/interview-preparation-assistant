@@ -1,4 +1,4 @@
-# Interview Prep Assistant
+# AI Interview Assistant
 
 An AI-powered Interview Preparation Assistant built using **FastAPI**, **RAG (Retrieval-Augmented Generation)**, **FAISS**, and **Google Gemini**.  
 
